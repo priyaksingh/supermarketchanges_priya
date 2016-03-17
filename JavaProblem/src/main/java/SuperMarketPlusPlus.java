@@ -1,38 +1,36 @@
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SuperMarketPlusPlus.
+ */
 public class SuperMarketPlusPlus {
 
+	/** The items. */
 	private List<Item> items = new ArrayList<Item>();
 
+	/**
+	 * Gets the items.
+	 *
+	 * @return the items
+	 */
 	public List<Item> getItems() {
 		return items;
 	}
 
+	/**
+	 * Sets the items.
+	 *
+	 * @param items the new items
+	 */
 	public void setItems(List<Item> items) {
 		this.items = items;
 	}
 
-	public void updateQuality1() {
-		for (int i = 0; i < items.size(); i++) {
-			if (items.get(i).getName() != null && !items.get(i).getName().isEmpty()) {
-				switch (ItemNames.valueOf(items.get(i).getName())) {
-				// To Do
-				case THERMAL_VEST:
-					decrementSellIn(items.get(i));
-				case AGED_BRIE:
-				case CHICKEN:
-				case BACKSTAGE_PASSES:
-				case GINGER_CAKE:
-				case ORGANIC_BANANA:
-
-				case SULFURAS:
-
-				}
-			}
-		}
-	}
-
+	/**
+	 * Update quality.
+	 */
 	public void updateQuality() {
 		for (int i = 0; i < items.size(); i++) {
 			if (items.get(i).getName() != null && !items.get(i).getName().isEmpty()) {
@@ -47,6 +45,12 @@ public class SuperMarketPlusPlus {
 		}
 	}
 
+	/**
+	 * Degrade quality.
+	 *
+	 * @param item the item
+	 * @return the int
+	 */
 	private int degradeQuality(Item item) {
 		if (!ItemNames.SULFURAS.getItenName().equals(item.getName())
 				&& !ItemNames.ORGANIC_BANANA.getItenName().equals(item.getName())) {
@@ -57,6 +61,12 @@ public class SuperMarketPlusPlus {
 		return item.getQuality();
 	}
 
+	/**
+	 * Checks if is quality degradation required.
+	 *
+	 * @param item the item
+	 * @return true, if is quality degradation required
+	 */
 	private boolean isQualityDegradationRequired(Item item) {
 		boolean isDegradeQuality = false;
 		if ((!ItemNames.AGED_BRIE.getItenName().equals(item.getName()))
@@ -66,6 +76,12 @@ public class SuperMarketPlusPlus {
 		return isDegradeQuality;
 	}
 
+	/**
+	 * Upgrade quality.
+	 *
+	 * @param item the item
+	 * @return the int
+	 */
 	private int upgradeQuality(Item item) {
 		if (item.getQuality() < 50) {
 			item.setQuality(item.getQuality() + 1);
@@ -85,6 +101,12 @@ public class SuperMarketPlusPlus {
 		return item.getQuality();
 	}
 
+	/**
+	 * Decrement sell in.
+	 *
+	 * @param item the item
+	 * @return the int
+	 */
 	private int decrementSellIn(Item item) {
 		if (isSellInDecrementRequired(item)) {
 			item.setSellIn(item.getSellIn() - 1);
@@ -92,6 +114,12 @@ public class SuperMarketPlusPlus {
 		return item.getSellIn();
 	}
 
+	/**
+	 * Update quality based on sellin.
+	 *
+	 * @param item the item
+	 * @return the item
+	 */
 	private Item updateQualityBasedOnSellin(Item item) {
 		if (item.getSellIn() < 0) {
 			if (!ItemNames.AGED_BRIE.getItenName().equals(item.getName())) {
@@ -116,6 +144,12 @@ public class SuperMarketPlusPlus {
 		return item;
 	}
 
+	/**
+	 * Checks if is sell in decrement required.
+	 *
+	 * @param item the item
+	 * @return true, if is sell in decrement required
+	 */
 	private boolean isSellInDecrementRequired(Item item) {
 		boolean isSellInDecrementRequired = false;
 		if (!ItemNames.SULFURAS.getItenName().equals(item.getName())) {
